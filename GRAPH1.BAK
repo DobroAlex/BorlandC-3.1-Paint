@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <dos.h>
+#include <conio.h>
+#include <graphics.h>
+#include <bios.h>
+//#include "C:\OS\MD.H"
+#include "md.H"
+#define STAR_SIZE 2 //размер одной стандартной единицы длины звезды,см рисунки
+#define SNOW_SIZE 3
+#define STAR_NUM 9
+#define SNOW_NUM 9
+#define SPEED 1000 //задержка в милисекундах между тактами движения (один такт -- одно движение звёзд и снега)
+int starX[STAR_NUM],starY[STAR_NUM],snowX[SNOW_NUM],snowY[SNOW_NUM];
+int main (){
+	int direction;//-1--влево,+1--вправо движение снежинки 
+	int i,j,k,l;
+      /* request auto detection */
+	int gdriver = DETECT, gmode, errorcode;
+
+/* initialize graphics mode */
+	initgraph(&gdriver, &gmode, "C:\OS");
+
+/* read result of initialization */
+	errorcode = graphresult();
+
+	if (errorcode != grOk)  /* an error occurred */
+	{
+	   printf("Graphics error: %s\n", grapherrormsg(errorcode));
+	   printf("Press any key to halt:");
+	   getch();
+	   exit(1);             /* return with error code */
+	}
+	settextstyle(0,1,3);
+	for (i=0;i<=SNOW_NUM;i++){
+	snowX[i]=rand()%getmaxx();
+	snowY[i]=rand()%getmaxy()-55;//число из головы. Нужно для того,чтоб некотрые снежинки появлялись за пределами видимой части экрана как сверху,так и снизу
+	}
+	for (i=0;i<=STAR_NUM;i++){
+		starX[i]=rand()%getmaxx();
+		starY[i]=rand()%getmaxy();//целесообразно оставить звезды внутри экрана
+	}
+	while(!kbhit()){
+		setcolor(YELLOW);
+		for (i=0;i<=STAR_NUM;i++){
+			line (starX[i],starY[i],starX[i]-3*STAR_SIZE,starY[i]+STAR_SIZE);
+			line (starX[i],starY[i],starX[i]+3*STAR_SIZE,starY[i]+STAR_SIZE);
+			line (starX[i],starY[i],starX[i]-3*STAR_SIZE,starY[i]-STAR_SIZE);
+			line (starX[i],starY[i],starX[i]+3*STAR_SIZE,starY[i]-STAR_SIZE);
+			line (starX[i]+3*STAR_SIZE,starY[i]-STAR_SIZE,starX[i]-3*STAR_SIZE,starY[i]-STAR_SIZE);
+			line (starX[i]-3*STAR_SIZE,starY[i]+STAR_SIZE, starX[i],starY[i]-2*STAR_SIZE);
+			line (starX[i]+3*STAR_SIZE,starY[i]+STAR_SIZE, starX[i],starY[i]-2*STAR_SIZE);
+			
+		}
+		delay(SPEED);
+		setcolor(WHITE);
+		for (i=0;i<=SNOW_NUM;i++){
+				line (snowX[i],snowY[i]-SNOW_SIZE,snowX[i],snowY[i]+SNOW_SIZE);
+				line (snowX[i]-SNOW_SIZE,snowY[i],snowX[i]+SNOW_SIZE,snowY[i]);
+				line (snowX[i]-SNOW_SIZE,snowY[i]-SNOW_SIZE,snowX[i]+SNOW_SIZE,snowY[i]+SNOW_SIZE);
+				line (snowX[i]-SNOW_SIZE,snowY[i]+SNOW_SIZE, snowX[i]+SNOW_SIZE,snowY[i]-SNOW_SIZE);
+		}
+		setcolor(BLACK);
+		for (i=0;i<=SNOW_NUM;i++){
+						
+		}
+		for (i=0;i<=STAR_NUM;i++){
+			line (starX[i],starY[i],starX[i]-3*STAR_SIZE,starY[i]+STAR_SIZE);
+			line (starX[i],starY[i],starX[i]+3*STAR_SIZE,starY[i]+STAR_SIZE);
+			line (starX[i],starY[i],starX[i]-3*STAR_SIZE,starY[i]-STAR_SIZE);
+			line (starX[i],starY[i],starX[i]+3*STAR_SIZE,starY[i]-STAR_SIZE);
+			line (starX[i]+3*STAR_SIZE,starY[i]-STAR_SIZE,starX[i]-3*STAR_SIZE,starY[i]-STAR_SIZE);
+			line (starX[i]-3*STAR_SIZE,starY[i]+STAR_SIZE, starX[i],starY[i]-2*STAR_SIZE);
+			line (starX[i]+3*STAR_SIZE,starY[i]+STAR_SIZE, starX[i],starY[i]-2*STAR_SIZE);
+			
+		}
+		for (i=0;i<=STAR_NUM;i++){
+			starX[i]=rand()%getmaxx();
+			starY[i]=rand()%getmaxy();
+		}
+	}
+	getch();
+	return 0;
+}
