@@ -4,4 +4,4 @@ This application was created according to my task as a student to lear how to us
 
 *.BGI files are required to launch compiled files and will work as video-card drivers
 
-You can launch programms without *.CHR files but they are required to display fonts. Without those files programm will use default font same to Times New Roman.
+You can launch programs without *.CHR files but they are required to display fonts. Without those files program will use default font same to Times New Roman.
