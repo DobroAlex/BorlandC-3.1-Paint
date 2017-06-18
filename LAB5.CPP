@@ -113,7 +113,7 @@ int main (){
 
 void processScanCode(int &mX, int &mY, int &mB, int scanCode, int &color, int &font, int &fontSize){
 	int charWidth = textwidth("A");
-	int charHeight = textheight ("A"); 
+	int charHeight = textheight ("A");
 	if (mX>getmaxx()-2*charWidth){
 		hideMouse();
 		setMousePos(0,mY+charHeight);
@@ -128,14 +128,14 @@ void processScanCode(int &mX, int &mY, int &mB, int scanCode, int &color, int &f
 		}
 		else if(scanCode==KB_UA){
 			setMousePos(mX,mY-charHeight);
-		}		
+		}
 		else if(scanCode==KB_DA){
 			setMousePos(mX, mY+charHeight);
 		}
 		else if (scanCode==KB_END){
 			setMousePos(getmaxx()-charWidth,mY);
 		}
-		else if (scanCode==KB_DEL){ 
+		else if (scanCode==KB_DEL){
 			hideMouse();
 			drawBar(mX,mY,mX+charWidth,mY+charHeight,BLACK );
 			showMouse();
@@ -184,7 +184,9 @@ void processScanCode(int &mX, int &mY, int &mB, int scanCode, int &color, int &f
 			}
 		}
 		else {
-			printf("scanCode=%04X(functinoal buttons)",scanCode);
+			printf("scanCode=%04X(functinoal buttons)",scanCode);	/*For debug puposes, you may delete this string if u don't
+										to see debug info in user bar*/
+			drawGUI();
 		}
 	}
 	else if ((char)scanCode!=0){
