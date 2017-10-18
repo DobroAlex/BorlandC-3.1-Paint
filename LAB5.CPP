@@ -1,3 +1,4 @@
+/*!!! Created by DobroAlex, licensed by Apache2.0!!!*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <dos.h>
